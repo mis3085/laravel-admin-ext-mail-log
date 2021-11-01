@@ -3,8 +3,6 @@
 namespace Mis3085\MailLog\Listeners;
 
 use Mis3085\MailLog\Models\MailLog;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class LogSentMessage
 {
@@ -21,7 +19,8 @@ class LogSentMessage
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param object $event
+     *
      * @return void
      */
     public function handle($event)
@@ -30,13 +29,13 @@ class LogSentMessage
         $identity = json_decode($identity);
 
         if (empty($identity->maillog_id)) {
-            return ;
+            return;
         }
 
         // mark as: smtp ?? sent, other ?? queued
         $mailLog = MailLog::find($identity->maillog_id);
         if (!$mailLog) {
-            return ;
+            return;
         }
 
         $driver = config('mail.driver', config('mail.default'));

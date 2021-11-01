@@ -2,9 +2,9 @@
 
 namespace Mis3085\MailLog\Console;
 
-use Mis3085\MailLog\Models\MailLog;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Mis3085\MailLog\Models\MailLog;
 
 class MailLogPruneCommand extends Command
 {
@@ -39,9 +39,9 @@ class MailLogPruneCommand extends Command
      */
     public function handle()
     {
-        $table = (new MailLog)->getTable();
-        $days  = (int) $this->option('days');
-        $date  = today()->subDays($days);
+        $table = (new MailLog())->getTable();
+        $days = (int) $this->option('days');
+        $date = today()->subDays($days);
 
         $count = DB::table($table)->where('created_at', '<', $date)->delete();
 

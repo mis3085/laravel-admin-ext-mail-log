@@ -3,8 +3,6 @@
 namespace Mis3085\MailLog\Listeners;
 
 use Mis3085\MailLog\Models\MailLog;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class LogSendingMessage
 {
@@ -21,7 +19,8 @@ class LogSendingMessage
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param object $event
+     *
      * @return void
      */
     public function handle($event)
