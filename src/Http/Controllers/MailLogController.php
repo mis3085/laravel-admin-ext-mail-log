@@ -2,10 +2,10 @@
 
 namespace Mis3085\MailLog\Http\Controllers;
 
-use Mis3085\MailLog\Models\MailLog;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
+use Mis3085\MailLog\Models\MailLog;
 
 class MailLogController extends AdminController
 {
@@ -38,7 +38,7 @@ class MailLogController extends AdminController
             'status-colors' => __('mail-log::mail-log.status-colors'),
         ];
 
-        $grid = new Grid(new MailLog);
+        $grid = new Grid(new MailLog());
         $grid->model()->orderBy('id', 'desc');
 
         $grid->disableCreateButton();
@@ -47,7 +47,7 @@ class MailLogController extends AdminController
 
         $grid->filter(function ($filter) {
             $filter->disableIdFilter();
-            $filter->column(1/2, function ($filter) {
+            $filter->column(1 / 2, function ($filter) {
                 $filter->where(function ($query) {
                     $query->where('recipient', 'like', "{$this->input}%");
                 }, trans('mail-log::mail-log.attrs.recipient'));
